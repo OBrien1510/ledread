@@ -35,7 +35,7 @@ setup(
     description="A script to read a text input",
     entry_points={
         'console_scripts': [
-            'ledread=ledread.cli:main',
+            'ledread=ledread:read',
         ],
     },
     install_requires=requirements,
