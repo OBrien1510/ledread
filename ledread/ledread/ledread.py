@@ -9,7 +9,7 @@ def firstLine():
     for line in f:
         command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
         if command == None:
-            matrix = ledsol.create()
+            matrix = ledsol.create(int(line))
     
     return matrix
             
@@ -47,11 +47,8 @@ def read(n):
                 coordToX = command.group().split(" ")[3].split(",")[0]
                 coordFromY = command.group().split(" ")[1].split(",")[1]
                 coordFromX = command.group().split(" ")[1].split(",")[0]
-        else:
-            ledsol.create(int(line))
-
-    finalMatrix = ledsol.turnOnorOff(coordFromX,coordFromY,coordToX,coordToY,n, cmd)
     
-    return finalMatrix
+            n = ledsol.turnOnOrOff(int(coordFromX),int(coordFromY),int(coordToX),int(coordToY),n, cmd)
+    return n
 
 """Main module."""
