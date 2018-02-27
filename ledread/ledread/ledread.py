@@ -14,6 +14,7 @@ def firstLine():
     return matrix
             
             
+            
 def read(n):
     cmd = 0
     coordFromX = 0
