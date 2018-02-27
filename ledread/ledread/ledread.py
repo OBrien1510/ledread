@@ -10,6 +10,7 @@ def firstLine():
         command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
         if command == None:
             matrix = ledsol.create(int(line))
+            break
     
     return matrix
             
@@ -24,15 +25,16 @@ def read(n):
     f = urlopen(sys.argv[2])
     for line in f:
         command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
+        
         if command != None:
-            y = command.group().split(" ")[0].replace("b'","")
+            y = command.group().split(" ")[0].replace("b'","").lstrip()
             if y == "turn":
                 
                 if command.group().split(" ")[1] == "on":
                     cmd = "turnon"
                 elif command.group().split(" ")[1] == "off":
                     cmd = "turnoff"
-            else:
+            elif y == "switch":
                 cmd = "switch"
             
             
