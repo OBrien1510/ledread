@@ -54,8 +54,31 @@ def read(n):
             coordFromY = int(coordFromY)
             coordToX = int(coordToX)
             coordToY = int(coordToY)
-            if coordFromX >= 0 and coordFromY >= 0 and coordToX >= 0 and coordFromY >= 0 and coordFromX < len(n) and coordFromY < len(n) and coordToX < len(n) and coordToY < len(n):
-                n = ledsol.turnOnOrOff(coordFromX,coordFromY,coordToX,coordToY,n, cmd)
+            if coordFromX >= len(n):
+                coordFromX = len(n) - 1
+                
+            if coordFromY >= len(n):
+                coordFromY = len(n) - 1
+                
+            if coordToX >= len(n):
+                coordToX = len(n) - 1
+                
+            if coordToX >= len(n):
+                coordToY = len(n) - 1
+                
+            if coordFromX < 0:
+                coordFromX = 0
+                
+            if coordFromY < 0:
+                coordFromY = 0
+                
+            if coordToX < 0:
+                coordToX = 0
+                
+            if coordToX < 0:
+                coordToY = 0
+            
+            n = ledsol.turnOnOrOff(coordFromX,coordFromY,coordToX,coordToY,n, cmd)
     return n
 
 """Main module."""
