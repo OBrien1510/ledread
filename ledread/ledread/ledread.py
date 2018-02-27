@@ -48,8 +48,12 @@ def read(n):
                 coordToX = command.group().split(" ")[3].split(",")[0]
                 coordFromY = command.group().split(" ")[1].split(",")[1]
                 coordFromX = command.group().split(" ")[1].split(",")[0]
-            if coordFromX >= 0 and coordFromY >= 0 and coordToX >= 0 and coordFromY >= 0 and coordFromX < len(n) and coordFromY < len(n) and coordToX < len(n) and coordToY < len(n)
-                n = ledsol.turnOnOrOff(int(coordFromX),int(coordFromY),int(coordToX),int(coordToY),n, cmd)
+            coordFromX = int(coordFromX)
+            coordFromY = int(coordFromY)
+            coordToX = int(coordToX)
+            coordToY = int(coordToY)
+            if coordFromX >= 0 and coordFromY >= 0 and coordToX >= 0 and coordFromY >= 0 and coordFromX < len(n) and coordFromY < len(n) and coordToX < len(n) and coordToY < len(n):
+                n = ledsol.turnOnOrOff(coordFromX,coordFromY,coordToX,coordToY,n, cmd)
     return n
 
 """Main module."""
