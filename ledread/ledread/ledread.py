@@ -27,9 +27,11 @@ def read(n):
         command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
         
         if command != None:
-            y = command.group().split(" ")[0].replace("b'","").lstrip()
+            y = command.group().lstrip()
+            y = y.split(" ")[0].replace("b'","")
+            
             if y == "turn":
-                
+        
                 if command.group().split(" ")[1] == "on":
                     cmd = "turnon"
                 elif command.group().split(" ")[1] == "off":
@@ -39,9 +41,13 @@ def read(n):
             
             
             if command.group().split(" ")[2] != "through":
-                x = command.group().split(" ")[4].split(",")[1].replace("\\n'","")
+    
+                print(command.group().split(" ")[2].split(",")[1])
                 coordFromY = command.group().split(" ")[2].split(",")[1]
                 coordFromX = command.group().split(" ")[2].split(",")[0]
+                x = command.group().lstrip(" ")
+                x = x.split(" ")[4].lstrip().split(",")
+                x = x[1].replace("\\n'","")
                 coordToY = x
                 coordToX = command.group().split(" ")[4].split(",")[0]
             else:
@@ -63,7 +69,7 @@ def read(n):
             if coordToX >= len(n):
                 coordToX = len(n) - 1
                 
-            if coordToX >= len(n):
+            if coordToY >= len(n):
                 coordToY = len(n) - 1
                 
             if coordFromX < 0:
@@ -75,7 +81,7 @@ def read(n):
             if coordToX < 0:
                 coordToX = 0
                 
-            if coordToX < 0:
+            if coordToY < 0:
                 coordToY = 0
             
             n = ledsol.turnOnOrOff(coordFromX,coordFromY,coordToX,coordToY,n, cmd)
