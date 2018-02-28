@@ -16,6 +16,7 @@ def firstLine():
             
             
             
+            
 def read(n):
     cmd = 0
     coordFromX = 0
