@@ -27,19 +27,32 @@ def read(n):
         command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
         
         if command != None:
-            y = command.group().lstrip()
-            y = y.split(" ")[0].replace("b'","")
-            
-            if y == "turn":
+            y = command.group().replace("b'","")
+            y = y.replace("\\n'","")
+            y = y.strip()
+            y = y.split(" ")
+            if y[0] == "turn":
         
-                if command.group().split(" ")[1] == "on":
+                if y[1] == "on":
                     cmd = "turnon"
-                elif command.group().split(" ")[1] == "off":
+                    y[0:2] = ""
+                elif y[1] == "off":
                     cmd = "turnoff"
-            elif y == "switch":
+                    y[0:2] = ""
+            elif y[0] == "switch":
                 cmd = "switch"
+                y[0:1] = ""
+            
+            y = ''.join(y).split("through")
+            y = ''.join(y)
+            
+            print(y)
+            
+            firstCoords = y[0].split(",")
+            secondCoords = y[1].split(",")
             
             
+            """
             if command.group().split(" ")[2] != "through":
     
                 print(command.group().split(" ")[2].split(",")[1])
@@ -56,6 +69,7 @@ def read(n):
                 coordToX = command.group().split(" ")[3].split(",")[0]
                 coordFromY = command.group().split(" ")[1].split(",")[1]
                 coordFromX = command.group().split(" ")[1].split(",")[0]
+            """
             coordFromX = int(coordFromX)
             coordFromY = int(coordFromY)
             coordToX = int(coordToX)
