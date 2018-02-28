@@ -28,6 +28,8 @@ Features
 
 * TODO
 
+To install, add --process-dependency-links after install command
+
 Credits
 -------
 
