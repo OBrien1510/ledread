@@ -5,18 +5,22 @@ from urllib.request import urlopen
 from ledsol import ledsol
 
 def firstLine():
-    f = urlopen(sys.argv[2])
-    for line in f:
-        command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
-        #if statements captures first time a line doesn't match the regex with the first line
-        #always being the size of the array
-        if command == None:
-            #create matrix of size 'line'
-            matrix = ledsol.create(int(line))
-            #break from for loop so that no extra lines are read
-            break
-    
-    return matrix
+    if len(sys.argv) < 3:
+        print("no file entered")
+        return False
+    else:
+        f = urlopen(sys.argv[2])
+        for line in f:
+            command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
+            #if statements captures first time a line doesn't match the regex with the first line
+            #always being the size of the array
+            if command == None:
+                #create matrix of size 'line'
+                matrix = ledsol.create(int(line))
+                #break from for loop so that no extra lines are read
+                break
+        
+        return matrix
             
             
             
