@@ -44,36 +44,18 @@ def read(n):
                 y[0:1] = ""
             
             y = ''.join(y).split("through")
-            y = ''.join(y)
+            y = ' '.join(y)
             
-            print(y)
+            firstCoords = y.split(" ")[0].split(",")
+            secondCoords = y.split(" ")[1].split(",")
             
-            firstCoords = y[0].split(",")
-            secondCoords = y[1].split(",")
+            coordFromX = int(firstCoords[0])
+            coordFromY = int(firstCoords[1])
             
+            coordToX = int(secondCoords[0])
+            coordToY = int(secondCoords[1])
             
-            """
-            if command.group().split(" ")[2] != "through":
     
-                print(command.group().split(" ")[2].split(",")[1])
-                coordFromY = command.group().split(" ")[2].split(",")[1]
-                coordFromX = command.group().split(" ")[2].split(",")[0]
-                x = command.group().lstrip(" ")
-                x = x.split(" ")[4].lstrip().split(",")
-                x = x[1].replace("\\n'","")
-                coordToY = x
-                coordToX = command.group().split(" ")[4].split(",")[0]
-            else:
-                x = command.group().split(" ")[3].split(",")[1].replace("\\n'","")
-                coordToY = x
-                coordToX = command.group().split(" ")[3].split(",")[0]
-                coordFromY = command.group().split(" ")[1].split(",")[1]
-                coordFromX = command.group().split(" ")[1].split(",")[0]
-            """
-            coordFromX = int(coordFromX)
-            coordFromY = int(coordFromY)
-            coordToX = int(coordToX)
-            coordToY = int(coordToY)
             if coordFromX >= len(n):
                 coordFromX = len(n) - 1
                 
