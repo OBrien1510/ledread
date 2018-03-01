@@ -10,10 +10,10 @@ def firstLine():
         return False
     else:
         
-        if sys.argv[2].startswith('http'):
-            f = urlopen(sys.argv[2])
-        elif not sys.argv[2].startswith('http'):
+        if not sys.argv[2].startswith('http'):
             f = open(sys.argv[2])
+        elif sys.argv[2].startswith('http'):
+            f = urlopen(sys.argv[2])
         else:
             print("invalid link entered")
             return False
@@ -39,7 +39,10 @@ def read(n):
     coordToX = 0
     coordFromY = 0
     coordToY = 0
-    f = urlopen(sys.argv[2])
+    if not sys.argv[2].startswith('http'):
+        f = open(sys.argv[2])
+    else:
+        f = urlopen(sys.argv[2])
     for line in f:
         command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
         
