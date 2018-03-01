@@ -9,10 +9,15 @@ def firstLine():
         print("no file entered")
         return False
     else:
-        if sys.argv[2].startswith('\'http'):
+        
+        if sys.argv[2].startswith('http'):
             f = urlopen(sys.argv[2])
-        else:
+        elif not sys.argv[2].startswith('http'):
             f = open(sys.argv[2])
+        else:
+            print("invalid link entered")
+            return False
+        
         for line in f:
             command = re.match(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", str(line))
             #if statements captures first time a line doesn't match the regex with the first line
